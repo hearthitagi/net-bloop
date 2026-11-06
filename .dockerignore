@@ -1,0 +1,6 @@
+*.exe
+dist/
+build/
+data/
+tools/imgtar/imgtar
+tools/imgtar/imgtar.exe

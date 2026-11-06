@@ -1,0 +1,18 @@
+services:
+  net-bloop:
+    image: net-bloop:0.2.2
+    container_name: net-bloop
+    # STUN hole punching and the reverse proxy need the host's real ports, so
+    # host networking is mandatory. Never switch this to bridge.
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      NETBLOOP_CONFIG: /data/net-bloop.toml
+    volumes:
+      - ./data:/data
+    # Host networking ignores these, they only document which ports are used.
+    # 16601 admin, 33220 reverse proxy (SNI/Host routed), STUN on its own port.
+    expose:
+      - "16601"
+      - "33220"
